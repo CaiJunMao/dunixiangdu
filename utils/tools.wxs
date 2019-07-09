@@ -1,0 +1,23 @@
+function formatBookCover(arr){
+  // var coverUrl = decodeURIComponent(arr[Math.floor(Math.random() * arr.length)])
+  // var newUrl = coverUrl.replace("/agent/", "");
+  // 不解码好像会快一点
+  return "http://statics.zhuishushenqi.com"+arr[Math.floor(Math.random() * arr.length)]
+}
+function randomColor(arr) {
+  var colors = ['orange','yellow','skyblue','green','blue']
+  var newColors=[]
+  var index
+  for (var i = 0; i <arr.length; i++){
+    index = Math.floor(Math.random() * colors.length)
+    newColors.push(colors[index])
+  }
+  
+  
+  return newColors
+}
+// 微信推荐使用module.exports来导出
+module.exports = {
+  formatBookCover: formatBookCover,
+  randomColor: randomColor
+}

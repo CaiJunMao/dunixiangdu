@@ -1,1 +1,61 @@
 /* pages/bookDetail/bookDetail.wxss */
+.topInfor{
+  height: 250rpx;
+  width: 225rpx;
+}
+.top-des{
+/* color: black; */
+}
+.title{
+font-size: 50rpx;
+}
+.desc{
+font-size:40rpx;
+color: black;
+}
+.btn{
+  margin: 15rpx 30rpx;  
+}
+.tag{
+  padding: 10rpx 20rpx;
+  margin-right:20rpx; 
+  margin-bottom:20rpx; 
+  color: white;
+  display: inline-block;
+  border-radius: 10%;
+  /* 使颜色随机 */
+  /* background: pink; */
+}
+.menu-show{
+
+}
+.kind-list__item-hd {
+  padding: 20px;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.kind-list__item-hd_show {
+  opacity: 0.4;
+}
+.kind-list__item-bd {
+  height: 0;
+  overflow: hidden;
+}
+
+.kind-list__item-bd_show {
+  height: auto;
+}
+.weui-cells {
+  margin-top: 0;
+  opacity: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.weui-cells_show {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}

@@ -7,13 +7,15 @@ Page({
     motto: '欢迎来到静夜思',
     userInfo: {},
     hasUserInfo: false,
+    // 判断d当前版本是否可用，参照：https://developers.weixin.qq.com/miniprogram/dev/api/base/wx.canIUse.html
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
   bindGoInto:function(){
-    wx.navigateTo({
-      url: '../main/main'
+    wx.switchTab({
+      url: '../classify/classify'
     })
+    
   },
   bindViewTap: function() {
     wx.navigateTo({
@@ -21,6 +23,15 @@ Page({
     })
   },
   onLoad: function () {
+  //  console.log('ss')
+    //调试用，1s后直接到该界面
+    setTimeout(()=>{
+      wx.switchTab({
+        url: '../bookshelf/bookshelf',
+      })
+    },1000)
+   
+    //判断全局状态，其他界面如果已授权，将不再重复授权
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -56,4 +67,5 @@ Page({
       hasUserInfo: true
     })
   }
+  
 })

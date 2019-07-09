@@ -1,1 +1,4 @@
 /* pages/classifyDetail/classifyDetail.wxss */
+.weui-media-box__desc{
+  height: 61rpx;
+}

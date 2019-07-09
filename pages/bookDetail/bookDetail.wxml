@@ -1,2 +1,62 @@
 <!--pages/bookDetail/bookDetail.wxml-->
-<text>pages/bookDetail/bookDetail.wxml</text>
+<view class="">
+  <view class="weui-media-box weui-media-box_appmsg " style='padding-top:0'>
+    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg topInfor">
+      <!-- 引用wxs,使图片随机从数组取一个，并解码 -->
+      <wxs src="../../utils/tools.wxs" module="tools" />
+      <image class="weui-media-box__thumb" src="{{tools.formatBookCover([book.cover])}}"></image>
+      <!-- <image class="weui-media-box__thumb" src="{{'http://statics.zhuishushenqi.com'+sItem.bookCover[0]}}" /> -->
+    </view>
+    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg top-des">
+      <view class="weui-media-box__title title">{{book.title}}</view>
+      <view class="weui-media-box__desc desc">
+        <view>作者：{{book.author}}</view>
+        <view>分类：{{book.majorCate}} {{book.minorCate}}</view>
+        <view>最近章节：{{book.lastChapter}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-flex">
+    <view class="weui-flex__item">
+      <button class="weui-btn btn" type="primary" bindtap="beginRead" >开始阅读</button>
+    </view>
+    <view class="weui-flex__item">
+      <button class="weui-btn btn" type="warn" bindtap='readLastCha'>最新章节</button>
+    </view>
+  </view>
+
+</view>
+<view class='weui-article'>
+  {{book.longIntro}}
+</view>
+<view class="weui-media-box ">
+  <lable wx:for="{{book.tags}}" wx:for-item="tag" wx:for-index="index" class=' tag' style=' background:{{tools.randomColor(book.tags)[index]}}'>{{tag}}</lable>
+  <!-- -->
+</view>
+<view class="weui-media-box ">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{chapters}}" range-key='title'>
+    <view class="picker">
+      <!-- 选择章节：{{chapters[index].title}} -->
+      <view  class="weui-cell weui-cell_access" style='padding:0'>
+          <view class="weui-cell__bd ">选择章节：{{chapters[index].title}}</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access "></view>
+      </view>
+    </view>
+  </picker>
+
+  <!-- <view>
+    <view id="{{item.id}} " class="weui-flex kind-list__item-hd {{open ? 'kind-list__item-hd_show' : ''}} " bindtap="toggle ">
+      <view class="weui-flex__item ">目录</view>
+    </view>
+    <view class="kind-list__item-bd {{open ? 'kind-list__item-bd_show' : ''}} ">
+      <view class="weui-cells {{open ? 'weui-cells_show' : ''}} ">
+        <block wx:for="{{chapters}} " wx:for-item="chapter " wx:key="index ">
+          <navigator url=" " class="weui-cell weui-cell_access " wx:if="{{index<10}} ">
+            <view class="weui-cell__bd ">{{chapter.title}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access "></view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+  </view> -->
+</view>

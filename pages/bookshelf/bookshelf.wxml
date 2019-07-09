@@ -1,0 +1,8 @@
+<!--pages/bookshelf/bookshelf.wxml-->
+<view class="weui-media-box weui-media-box_appmsg  bookShelf">
+  <navigator  hover-class='none' url= "../bookRead/bookRead?title={{book.title}}"  wx:for="{{bookShelf}}" wx:for-item='book' class='book'>
+    <wxs src="../../utils/tools.wxs" module="tools" />
+    <image class="weui-media-box__thumb" src="{{tools.formatBookCover([book.cover])}}"></image>
+    <text>{{book.title}}</text>
+  </navigator>
+</view>

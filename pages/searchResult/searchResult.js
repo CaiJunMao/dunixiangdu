@@ -5,14 +5,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    keyWord:'',
+    bookList:'',
   },
-
+  getNovels: function () {
+    // console.log(e)
+    // let keyword = '斗破'
+    const that = this
+    wx.request({
+      url: 'http://api.zhuishushenqi.com/book/fuzzy-search',
+      data: { query: that.data.keyWord },
+      success(res) {
+        that.setData({
+          bookList: res.data.books,
+        })
+      },
+      fail({
+        errMsg
+      }) {
+        console.log('request fail', errMsg)
+        that.setData({
+          loading: false
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      keyWord: options.keyword
+    })
+    this.getNovels()
   },
 
   /**

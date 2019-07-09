@@ -1,1 +1,157 @@
 /* pages/bookRead/bookRead.wxss */
+
+.bookRead {
+  position: relative;
+  overflow:hidden;
+
+}
+
+/* padding上下无 */
+
+.padding-tb-none {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.mask {
+  position: absolute;
+  bottom: 0;
+  /* height: 30vh; */
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
+  /* padding-top:2%;
+  padding-bottom: 2%;  */
+  color: white;
+  padding-bottom: 0;
+  padding-top: 15rpx;
+}
+
+.bottom-settting {
+  height: 56%;
+  /* width: 80%; */
+}
+
+.bottom-nav {
+  height: 40%;
+  /* width: 80%; */
+  display: flex;
+  justify-content: space-around;
+}
+
+.mask .setting {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.mask .setting .left-span {
+  width: 20%;
+  height: 50rpx;
+  font-size: 18px;
+}
+
+.mask .setting .right-part {
+  height: 80rpx;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mask .setting .right-part button {
+  /* height: 80rpx; */
+  margin: 0;
+  width: 40%;
+  line-height: 2.2;
+  /* font-size会默认18px,所以要在40px中间，设为2.2的行高 */
+}
+
+.mask .setting .right-part .color {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.color-active {
+  border: 1px solid palevioletred;
+}
+
+/* 底部 */
+
+/* 背景图片样式 */
+
+.bk-image {
+  background-size: 100% 100%;
+  height: 80rpx;
+  width: 80rpx;
+}
+
+.bk-image-active {
+  background-color: orange;
+}
+
+.icon-menu {
+  /* 小程序中不能通过css来加载图片，应该直接用行内样式 *//* background:url(image/menu.png); */
+}
+
+/* 上下章节 */
+
+.next-last {
+  width: 20vw;
+  height: 30vh;
+  position: fixed;
+  top: 35vh;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.last {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+/* 目录弹页 */
+
+.menu {
+  position: absolute;
+  /* 让展开时变成top:0从而有过渡效果 */
+  top: 100%;
+  z-index: 99;
+  height:100vh;
+  padding-bottom:0;
+  box-sizing: border-box;
+  width: 100vw;
+  background-color: #fff;
+  /* 展开收起过渡 */
+transition: top 1s ease;
+}
+.menu-top{
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 50rpx;
+color: black;
+margin-top: 0;
+}
+.menu-top .menu-order{
+  
+}
+.menu-top button{
+  margin: 0;
+  height: 60rpx;
+
+  width: 70rpx;
+  background-size: 80%;
+  background-position:center center;
+  background-repeat: no-repeat;
+}
+
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

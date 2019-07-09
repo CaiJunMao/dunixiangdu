@@ -1,2 +1,113 @@
 <!--pages/bookRead/bookRead.wxml-->
-<text>pages/bookRead/bookRead.wxml</text>
+<!-- 文本 -->
+<view class="bookRead">
+  <view class="weui-media-box padding-tb-none" style="background:{{bodyColor}};color:{{bodyFontColor}}">
+    <!-- 中间层，点击，头部底部显示 -->
+    <!-- <view class="artical-action-mid" bindtap="midaction"></view> -->
+    <!-- 主体内容 -->
+    <!-- 注意不设置高度scroll-top将不起作用 -->
+    <scroll-view scroll-top="{{scroll_top}}" scroll-y='true' style="font-size:{{initFontSize}}px; height:100vh" bindscroll="scrollContain" bindscrolltolower="bindscrolltolower" bindtap='isClick' bindlongtap='longTapAction' bindtouchstart="touchStart" bindtouchend="touchEnd">
+      <h3>{{currentChapter.title}}</h3>
+      <!-- style='text-indent:50px' -->
+      <!-- <rich-text nodes="{{content}}"></rich-text> -->
+      <!-- \t(不能写开头)  或直接空格，或&nbsp；(需要decode='true')都是可以的-->
+      <!-- <text space='emsp' decode='true'>\n\t灯\t火 通&nbsp;明的内殿之中，金碧辉煌，气势威严，殿内有着长明灯燃烧，其中燃烧着一颗青石，袅袅的青烟升腾而起，盘绕在殿内。\n&nbsp;&nbsp; 那是青檀石，燃烧起来会释放出异香，有着凝神静心之效，乃是修炼时必备之物，不过此物价格不低，能够当做燃料般来使用，足以说明此地主人颇有地位。</text> -->
+      <text space='emsp' decode='true'>{{content}}</text>
+    </scroll-view>
+
+  </view>
+  <view class='weui-media-box mask ' style="display:{{nav}}">
+    <!-- 字体调节 -->
+    <!-- style="display:{{ziti}}" -->
+    <view class=" bottom-settting" style="display:{{ziti}}">
+      <view class="setting">
+        <view class="left-span">字号</view>
+        <!-- class='weui-flex' -->
+        <view class="right-part">
+          <button class="weui-btn " type="primary" bindtap="bindBig">大</button>
+          <button class="weui-btn  " type="warn" bindtap="bindSmall">小</button>
+        </view>
+      </view>
+      <view class="setting">
+        <view class="left-span">背景</view>
+        <view class='right-part'>
+          <block wx:for="{{colorArr}}" wx:for-item="color" wx:key="this">
+            <view class="color {{_num==index?'color-active':''}}" data-num="{{index}}" style="background-color:{{color.value}}" bindtap="bgChange"></view>
+          </block>
+        </view>
+
+      </view>
+    </view>
+    <!-- 上下章节 zj-->
+    <!-- style="display:{{zj}}" -->
+    <block>
+
+      <view class=" next-last last" bindtap="lastChapter">
+        <image src='../../image/previous.png' style='width:100%;height:100%'></image>
+      </view>
+      <view class="next-last next" bindtap="nextChapter">
+        <image src='../../image/next.png' style='width:100%;height:100%'></image>
+      </view>
+
+    </block>
+    <!-- 底部 -->
+    <!-- style="display:{{nav}}" -->
+    <view class="bottom-nav">
+      <view class="item menu-button" bindtap='menuToggle'>
+        <view class="item-warp">
+          <view class="icon-menu bk-image" style='background-image:url(../../image/menu3.png)'></view>
+          <view class="icon-text">目录</view>
+        </view>
+      </view>
+      <view class="item current" bindtap="zitiAction">
+        <view class="item-warp">
+          <view class="icon-ft bk-image" style='background-image:url(../../image/font.png)'></view>
+          <view class="icon-text">字体</view>
+        </view>
+      </view>
+      <view class="item" bindtap="dayNight">
+        <view class="item-warp" wx:if="{{daynight}}">
+          <view class="icon-day bk-image" style='background-image:url(../../image/day.png)'></view>
+          <view class="icon-text">白天</view>
+        </view>
+        <view class="item-warp" wx:else>
+          <view class="icon-night bk-image" style='background-image:url(../../image/night.png)'></view>
+          <view class="icon-text">夜间</view>
+        </view>
+      </view>
+       <view class="item" bindtap="addBookshelf">
+        <view class="item-warp" wx:if="{{!isAdd}}">
+          <view class="bk-image" style='background-image:url(../../image/add.png)'></view>
+          <view class="icon-text">添加</view>
+        </view>
+        <view class="item-warp" wx:else>
+          <view class="bk-image" style='background-image:url(../../image/remove.png)'></view>
+          <view class="icon-text">移出</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 目录弹页 -->
+  <!-- display:{{menu}}; -->
+  <view class="weui-media-box menu" style="{{menu=='block' ? 'top:0':'top:100%'}}">
+    <scroll-view scroll-y='true' style="font-size:{{initFontSize}}px; height:100%;">
+      <view class="weui-cells__title menu-top">
+        <text>目录</text>
+        <!-- 正反序 -->
+        <view class="menu-order" bindtap="order">
+          <button wx:if="{{positiveOrder}}" class="weui-btn btn" type="default" bindtap="" style='background-image:url(../../image/reverse.png)'></button>
+          <button wx:else class="weui-btn btn" type="default" bindtap="" style='background-image:url(../../image/positive.png)'></button>
+        </view>
+        <!-- 返回 -->
+         <button class="weui-btn btn" type="default" bindtap="menuToggle" style='background-image:url(../../image/return.png)'></button>
+      </view>
+      <view class="weui-cells weui-cells_after-title">
+      <!-- {{}}不能直接用展开运算符...，只能另外再定义一个orderChapters -->
+        <view  bindtap='goCurrentChapter' data-order='{{index+1}}' class="weui-cell weui-cell_access" hover-class="weui-cell_active" wx:for="{{positiveOrder ? chapters : orderChapters}}" wx:for-item="chapter"  wx:for-index='index'>
+          <view class="weui-cell__bd">{{chapter.title}}</view>
+        </view>
+
+      </view>
+    </scroll-view>
+  </view>
+</view>

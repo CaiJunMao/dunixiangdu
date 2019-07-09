@@ -1,2 +1,33 @@
 <!--pages/classifyDetail/classifyDetail.wxml-->
-<text>pages/classifyDetail/classifyDetail.wxml</text>
+
+<view>
+  <!-- <view>当前选择：{{checkedType}},{{checkedMin}}</view> -->
+  <picker-view indicator-style="height:50rpx;" style="width: 100%; height: 200rpx;" value="{{allChecked}}" bindchange="bindChange">
+    <picker-view-column>
+      <view wx:for="{{types}}" style="line-height: 50rpx; text-align:center">{{item.cName}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{mins}}" style="line-height: 50rpx; text-align:center">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+  <view class="weui-panel weui-panel_access">
+    <view class="weui-panel__bd">
+      <!-- 路由标签传参，在传过去的页面中onload生命周期中获取 -->
+      <navigator url="../bookDetail/bookDetail?bid={{novel._id}}" class="weui-media-box weui-media-box_appmsg item" hover-class="weui-cell_active" wx:for="{{novelList}}" wx:for-item="novel">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <!-- 引用wxs,使图片随机从数组取一个，并解码 -->
+          <wxs src="../../utils/tools.wxs" module="tools" />
+          <image class="weui-media-box__thumb" src="{{tools.formatBookCover([novel.cover])}}"></image>
+          <!-- <image class="weui-media-box__thumb" src="{{'http://statics.zhuishushenqi.com'+sItem.bookCover[0]}}" /> -->
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+          <view class="weui-media-box__title">{{novel.title}}</view>
+          <view class="weui-media-box__desc">
+            简介：{{novel.shortIntro}}
+          </view>
+        </view>
+      </navigator>
+
+    </view>
+  </view>
+</view>

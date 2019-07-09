@@ -1,2 +1,24 @@
 <!--pages/search/search.wxml-->
-<text>pages/search/search.wxml</text>
+<!-- <text>pages/search/search.wxml</text> -->
+<view class="weui-cell weui-cell_input">
+  <view class="weui-cell__bd">
+    <input class="weui-input" placeholder="请输入关键字" bindinput="getSugess" focus='true' confirm-type='search' />
+  </view>
+
+</view>
+<view class="weui-panel weui-panel_access">
+  <view class="weui-panel__bd">
+    <!-- 路由标签传参，在传过去的页面中onload生命周期中获取 -->
+    <view class='weui-media-box weui-media-box_appmsg item' wx:if="{{searchKeyWord}}">可能想搜：</view>
+    <!-- url="../searchResult/searchResult?keyword={{suggest}}" -->
+    <view  bindtap='saveHistory' class="weui-media-box weui-media-box_appmsg item" hover-class="weui-cell_active" wx:for="{{suggestKeyWords}}" wx:for-item="suggest" wx:if="{{suggestKeyWords}}" data-suggest='{{suggest}}' >
+      {{suggest}}
+    </view>
+    <view class='weui-media-box'>
+      <view>历史搜索:</view>
+      <view class="weui-media-box_appmsg item history" hover-class="weui-cell_active"  wx:for="{{historys}}" wx:for-item="history" bindtap='useHistory' data-history='{{history}}'>
+        {{history}}
+      </view>
+    </view>
+  </view>
+</view>

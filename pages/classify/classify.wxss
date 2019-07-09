@@ -1,1 +1,48 @@
 /* pages/classify/classify.wxss */
+/* 为了使用scrol-view,需要获取窗口高度除去底部tabbar的高度，通过设置最外层节点宽高100%，(因为page没高度，所以设fixed使其对着窗口100%)position: fixed;再获取该节点高可得 */
+.classify{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  /* //ipone:644px */
+}
+.swiper-tab{
+    width: 100%;
+    /* border-bottom: 2rpx solid #ccc; */
+    text-align: center;
+    height: 88rpx;
+    line-height: 88rpx;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+}
+.active{
+    color:#F65959;
+    border-bottom: 4rpx solid #F65959;
+}
+swiper{
+  text-align: center;
+  /* height: 1080rpx; */
+  /* //1280-88-38rpx; */
+}
+swiper-item  .item{
+ display: flex;
+justify-content: space-around;
+height: 120rpx;
+}
+swiper-item image{
+  height: 100rpx;
+  width: 20%;
+  border-radius: 50%;
+  float: left;
+  margin-right: 5px;
+}
+swiper-item .description{
+ 
+}
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

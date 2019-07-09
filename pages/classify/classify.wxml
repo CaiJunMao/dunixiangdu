@@ -1,2 +1,46 @@
 <!--pages/classify/classify.wxml-->
-<text>pages/classify/classify.wxml</text>
+<view class="classify">
+  <!-- 标签卡 -->
+  <view class="swiper-tab">
+    <view class="swiper-tab-item {{currentTab == index?'active':''}}" wx:for="{{bigClassifyType}}" data-current="{{index}}" bindtap="clickTab" wx:key='{{index}}'>
+      {{item.cName}}
+    </view>
+  </view>
+  <!-- 标签页 -->
+  <swiper current="{{currentTab}}" duration="300" bindchange="swiperTab" style="height:{{height}}px">
+  <!-- 对对象：wx:for-item="bItem" 是value  wx:for-index="bIndex" 是key
+  对数组：值，下标
+  -->
+    <swiper-item wx:for="{{bigClassify}}" wx:for-item="bItem" wx:for-index="bKey">
+      <scroll-view scroll-y="true" style="height:{{height}}px">
+        <view class="weui-panel weui-panel_access">
+          <view class="weui-panel__bd">
+          <!-- 路由标签传参，在传过去的页面中onload生命周期中获取 -->
+            <navigator url="../classifyDetail/classifyDetail?gender={{bKey}}&major={{sItem.name}}" class="weui-media-box weui-media-box_appmsg item" hover-class="weui-cell_active" wx:for="{{bItem}}" wx:for-item="sItem">
+              <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+              <!-- 引用wxs,使图片随机从数组取一个，并解码 -->
+                <wxs src="../../utils/tools.wxs" module="tools" />
+                <image class="weui-media-box__thumb" src="{{tools.formatBookCover(sItem.bookCover)}}"></image>
+                <!-- <image class="weui-media-box__thumb" src="{{'http://statics.zhuishushenqi.com'+sItem.bookCover[0]}}" /> -->
+              </view>
+              <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                <view class="weui-media-box__title">{{sItem.name}}</view>
+                <view class="weui-media-box__desc">
+                书籍总计：{{sItem.bookCount}}
+                近一月更新：{{sItem.monthlyCount}}
+                </view>
+              </view>
+            </navigator>
+
+          </view>
+          <view class="weui-panel__ft">
+            <view class="weui-cell weui-cell_access weui-cell_link">
+              <view class="weui-cell__bd">查看更多</view>
+              <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
+</view>
